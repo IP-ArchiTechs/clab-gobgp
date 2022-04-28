@@ -2,6 +2,34 @@
 
 This is a Docker container designed to be used in Containerlab to simulate an upstream ISP.
 
+You can pull this from [Docker Hub](https://hub.docker.com/r/iparchitechs/clab-gobgp)
+
+Pull in Docker
+
+```bash
+docker pull iparchitechs/clab-gobgp
+```
+
+## Using in Containerlab
+
+```yaml
+topology: 
+  nodes:
+    bgp:
+      kind: linux
+      image: docker.io/iparchitechs/clab-gobgp
+      env:
+        ip4_addr: "203.0.113.1"
+        ip4_cidr: "30"
+        ip6_addr: "2001:db8::1"
+        ip6_cidr: "64"
+        local_asn: 64496
+        peer_asn: 65536
+        peer_ip4: "203.0.113.2"
+        peer_ip6: "2001:db8::2"
+        default_route: "true"
+```
+
 ## Features
 
 ### IPv4 Advertisements
@@ -58,26 +86,6 @@ As this is just for a lab environment, usernames/passwords are hardcoded:
 
 - admin/admin
 - root/root
-
-## Using this in Containerlab
-
-```yaml
-topology: 
-  nodes:
-    bgp:
-      kind: linux
-      image: clab-gobgp:latest
-      env:
-        ip4_addr: "203.0.113.1"
-        ip4_cidr: "30"
-        ip6_addr: "2001:db8::1"
-        ip6_cidr: "64"
-        local_asn: 64496
-        peer_asn: 65536
-        peer_ip4: "203.0.113.2"
-        peer_ip6: "2001:db8::2"
-        default_route: "true"
-```
 
 ## Future Items
 

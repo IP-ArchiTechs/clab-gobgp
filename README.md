@@ -20,6 +20,22 @@ For lab testing, it's usually not necessary (or wanted) to have full tables, so 
 
 If the environment variable `default_route` is set, a default route will be advertised.
 
+### IPv6 Advertisements
+
+For lab testing, it's usually not necessary (or wanted) to have full tables, so we only advertise the following:
+
+- 2001:1::/32
+- 2002:2::/32
+- 2003:3::/32
+- 2004:4::/32
+- 2005:5::/32
+- 2006:6::/32
+- 2007:7::/32
+- 2008:8::/32
+- 2009:9::/32
+
+If the environment variable `default_route` is set, a default route will be advertised.
+
 ### Testing Reachability
 
 This container will then respond on any IP address to ICMP, TCP port 80, and TCP port 443 (self signed certificate).
@@ -54,10 +70,13 @@ topology:
       env:
         ip4_addr: "203.0.113.1"
         ip4_cidr: "30"
+        ip6_addr: "2001:db8::1"
+        ip6_cidr: "64"
         local_asn: 64496
         peer_asn: 65536
         peer_ip4: "203.0.113.2"
-        default_route: true
+        peer_ip6: "2001:db8::2"
+        default_route: "true"
 ```
 
 ## Future Items
@@ -66,5 +85,4 @@ This is currently a pretty barebones/quick setup
 
 Future items:
 
-- IPv6 Support
 - Allow password to be defined by user

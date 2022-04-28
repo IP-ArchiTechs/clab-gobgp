@@ -22,6 +22,21 @@ neighbors:
 
 EOL
 
+if [[ -n ${ip6_addr} ]]; then
+
+cat >> /gobgp/isp_config.yml << EOL
+  - config:
+      neighbor-address: ${peer_ip6}
+      peer-as: ${peer_asn}
+    afi-safis:
+      - config:
+          afi-safi-name: ipv6-unicast
+
+EOL
+
+
+fi
+
 # start gobgpd daemon
 gobgpd -t yaml -f /gobgp/isp_config.yml > /log &
 sleep 5

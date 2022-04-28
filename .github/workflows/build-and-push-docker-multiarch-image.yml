@@ -3,14 +3,14 @@ name: Docker Image Build and Push - CI Workflow
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   build-and-push-muti-arch-docker-image:
     runs-on: ubuntu-latest
     env:
-      DOCKER_IMAGE: network-multitool
-      DOCKERHUB_ORGNAME: praqma
+      DOCKER_IMAGE: clab-gobgp
+      DOCKERHUB_ORGNAME: iparchitechs
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
       # 
       # DOCKERHUB_USERNAME and DOCKERHUB_TOKEN are to be set in the GITHUB WEB UI,

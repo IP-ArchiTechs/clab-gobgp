@@ -6,7 +6,7 @@ topology:
   nodes:
     bgp:
       kind: linux
-      image: clab-gobgp:latest
+      image: docker.io/iparchitechs/clab-gobgp
       env:
         ip4_addr: "203.0.113.1"
         ip4_cidr: "30"
@@ -20,6 +20,11 @@ topology:
     rmt:
       kind: linux
       image: ghcr.io/hellt/network-multitool:latest
+      exec: 
+        - ip address add dev eth1 203.0.113.2/3
+        - route add default gw 203.0.113.1
+        - ip -6 address add dev eth1 2001:db8::2/64
+        - route add -A inet6 default gw 2001:db8::1
 
   links:
     - endpoints: ["bgp:eth1", "rmt:eth1"]

@@ -4,8 +4,8 @@
 bash /gobgp/ipaddr.sh
 
 # respond to all addresses that are advertised
-ip -4 route add local 0.0.0.0/0 dev lo
-ip -6 route add local ::/0 dev lo
+ip netns exec bgp ip -4 route add local 0.0.0.0/0 dev lo
+ip netns exec bgp ip -6 route add local ::/0 dev lo
 
 cat > /gobgp/isp_config.yml << EOL
 global:
@@ -38,7 +38,7 @@ EOL
 fi
 
 # start gobgpd daemon
-gobgpd -t yaml -f /gobgp/isp_config.yml > /log &
+ip netns exec bgp gobgpd -t yaml -f /gobgp/isp_config.yml > /log &
 sleep 5
 
 # make ipv4 BGP announcement

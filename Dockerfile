@@ -22,8 +22,6 @@ RUN echo 'PasswordAuthentication yes' >> /etc/ssh/sshd_config
 RUN echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
 RUN echo 'PermitEmptyPasswords yes' >> /etc/ssh/sshd_config
 
-RUN adduser -h /home/admin -s /bin/sh -D admin
-RUN echo -n 'admin:admin' | chpasswd
 RUN echo -n 'root:root' | chpasswd
 
 # Copy a simple index.html to eliminate text (index.html) noise which comes with default nginx image.

@@ -30,6 +30,22 @@ topology:
         default_route: "true"
 ```
 
+## Accessing Go BGP
+
+In oder to get remote access into the GoBGP instance, this container makes use of Linux network namespaces. Everything related to gobgp is in the `bgp` namespace.
+
+To execute one off commands, you can do the following:
+
+```bash
+ip netns exec bgp <command>
+```
+
+Or if you want to do multiple things to gobgp, you can do the following:
+
+```bash
+ip netns exec bgp bash
+```
+
 ## Features
 
 ### IPv4 Advertisements
@@ -84,7 +100,6 @@ In a lab environment, the end user may not always have access to the Containerla
 
 As this is just for a lab environment, usernames/passwords are hardcoded:
 
-- admin/admin
 - root/root
 
 ## Future Items

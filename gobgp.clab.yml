@@ -1,0 +1,25 @@
+name: gobgp
+mgmt:
+  network: gobgp
+  ipv4_subnet: 198.18.255.0/24
+topology: 
+  nodes:
+    bgp:
+      kind: linux
+      image: clab-gobgp:latest
+      env:
+        ip4_addr: "203.0.113.1"
+        ip4_cidr: "30"
+        ip6_addr: "2001:db8::1"
+        ip6_cidr: "64"
+        local_asn: 64496
+        peer_asn: 65536
+        peer_ip4: "203.0.113.2"
+        peer_ip6: "2001:db8::2"
+        default_route: "true"
+    rmt:
+      kind: linux
+      image: ghcr.io/hellt/network-multitool:latest
+
+  links:
+    - endpoints: ["bgp:eth1", "rmt:eth1"]

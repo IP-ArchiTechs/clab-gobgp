@@ -30,17 +30,17 @@ gobgp global rib add 224.0.2.0/24 $attr_v4
 
 if [[ -n ${ip6_addr} ]]; then
 
-  attr_v6="
-    -a ipv6 \
-    identifier 1 \
-    origin igp \
-    nexthop $ip6_addr \
-    med 100 \
-    local-pref 100 \
-  "
+attr_v6="
+  -a ipv6 \
+  identifier 1 \
+  origin igp \
+  nexthop $ip6_addr \
+  med 100 \
+  local-pref 100 \
+"
 
   for i in $(seq 1 1 9); do
-    echo 2000:$i::/32
+    gobgp global rib add 200$i:$i::/32 $attr_v6
   done
 
   if [[ -n ${default_route} ]]; then

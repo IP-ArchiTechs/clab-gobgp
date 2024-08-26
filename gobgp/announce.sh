@@ -40,7 +40,7 @@ attr_v6="
   done
 
   if [[ -n ${default_route} ]]; then
-    ip netns exec bgp gobgp global rib add ::/0 $attr_v4
+    ip netns exec bgp gobgp global rib add ::/0 $attr_v6
   fi
 
   ip netns exec bgp gobgp global rib add 2000:1:0:1::/52 $attr_v6
